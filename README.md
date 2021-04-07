@@ -1,6 +1,12 @@
 # progress-management-app
 研究の進捗を管理するためのデスクトップアプリ  
-Vue + electron + sqlite3で実装する。
+[データベース設計](./UML.dio)
+## 使用予定技術
+| 要素 | フレームワーク |
+| --- | --- |
+| フロントエンド | Vue.js, Materialize CSS |
+| データベース | sqlite3 |
+| その他 | electron |
 ## つまづき
 - electronのインストールでエラーが出た -> `node node_modules/electron/install.js`を実行することで解決  
 - electronでNodeモジュールを使用するときは`./node_modules/.bin/electron-rebuild  -f -w {モジュール名}`でリビルドが必要らしい
