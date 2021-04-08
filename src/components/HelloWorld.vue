@@ -28,6 +28,20 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    <md-card>
+      <md-card-header>
+        <div class="md-title">Card without hover effect</div>
+      </md-card-header>
+
+      <md-card-content>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non.
+      </md-card-content>
+
+      <md-card-actions>
+        <md-button>Action</md-button>
+        <md-button>Action</md-button>
+      </md-card-actions>
+    </md-card>
   </div>
 </template>
 
