@@ -11,8 +11,10 @@
 - electronのインストールでエラーが出た -> `node node_modules/electron/install.js`を実行することで解決  
 - electronでNodeモジュールを使用するときは`./node_modules/.bin/electron-rebuild  -f -w {モジュール名}`でリビルドが必要らしい
 - vue-materialのインストール  
-`npm install --save-dev style-loader css-loader sass-loader url-loader file-loader vue-style-loader` でパッケージの依存関係でエラーが出た -> `--save --legacy-peer-deps` オプションをつけることで解決  
-※依存関係のエラーを無視してインストールしているだけなので実行してみて不具合があれば別で解決する必要がある
+`npm install --save-dev style-loader css-loader sass-loader url-loader file-loader vue-style-loader` でパッケージの依存関係でエラーが出た -> ~~`--save --legacy-peer-deps` オプションをつけることで解決  
+※依存関係のエラーを無視してインストールしているだけなので実行してみて不具合があれば別で解決する必要がある~~  
+webpackのバージョンの問題だった。最新のsass-loaderはwebpack4は非推奨 -> `npm install --save-dev sass-loader@10`でsass-loader@10系をインストールして解決
+
 
 ## Project setup
 ```
