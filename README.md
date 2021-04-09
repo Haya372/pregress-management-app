@@ -4,7 +4,7 @@
 ## 使用予定技術
 | 要素 | フレームワーク |
 | --- | --- |
-| フロントエンド | Vue.js, Materialize CSS ([vue-material](https://vuematerial.io/components/app/)) |
+| フロントエンド | Vue.js, vuetify ([vuetify](https://vuetifyjs.com/ja/)) |
 | データベース | sqlite3 |
 | その他 | electron |
 ## つまづき
