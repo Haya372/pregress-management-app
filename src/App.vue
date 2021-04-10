@@ -36,25 +36,50 @@
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
-
     <v-main>
-      <HelloWorld/>
+      <v-tabs v-model="tab">
+        <v-tabs-slider></v-tabs-slider>
+        <v-tab href="#progress">進行中</v-tab>
+        <v-tab href="#holding">保留</v-tab>
+        <v-tab href="#finished">終了済み</v-tab>
+      </v-tabs>
+      <v-tabs-items v-model="tab">
+        <v-tab-item value="progress">
+          <v-card flat>
+            <Home state="進行中" />
+          </v-card>
+        </v-tab-item>
+
+        <v-tab-item value="holding">
+          <v-card flat>
+            <Home state="保留" />
+          </v-card>
+        </v-tab-item>
+
+        <v-tab-item value="finished">
+          <v-card flat>
+            <Home state="終了済み" />
+          </v-card>
+        </v-tab-item>
+      </v-tabs-items>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import Home from './views/Home';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    Home
   },
 
-  data: () => ({
-    //
-  }),
+  data: function(){
+    return {
+      tab: null
+    }
+  },
 };
 </script>
