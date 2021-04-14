@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import crud from './utils/crud'
+
+Vue.use(crud);
 
 Vue.config.productionTip = false
 
@@ -16,3 +19,7 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
+
+process.on('uncaughtException', function (error) {
+  console.error(error);
+});

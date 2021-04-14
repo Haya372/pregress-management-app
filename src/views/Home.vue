@@ -41,6 +41,7 @@
 // @ is an alias to /src
 import Task from '@/components/Task.vue'
 import sample_data from '../../sample_data'
+
 export default {
   name: 'Home',
   components: {
@@ -64,10 +65,21 @@ export default {
     },
     add_task: function(){
       // タスク追加処理
-
-      this.adding = false;
-      this.new_task = "";
+      let that = this;
+      this.$crud.task.create(this.new_task, function(){
+        that.adding = false;
+        that.new_task = "";
+        that.$crud.task.read(this.state).then(function(res){
+          that.tasks = res;
+        });
+      });
     }
+  },
+  mounted: async function(){
+    let that = this;
+    this.$crud.task.read(this.state, function(result){
+      that.tasks = result;
+    });
   }
 }
 </script>
