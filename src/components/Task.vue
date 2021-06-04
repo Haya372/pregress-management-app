@@ -61,7 +61,6 @@
 </template>
 
 <script>
-import sample_data from '../../sample_data'
 import Problem from '@/components/Problem.vue'
 
 export default {
@@ -73,10 +72,10 @@ export default {
   data: function(){
     return {
       task: this.data,
-      problems: sample_data.problems,
       editing: false,
       adding: false,
       new_problem: "",
+      problems: []
     }
   },
   methods: {
@@ -85,18 +84,38 @@ export default {
     },
     add_problem: function(){
       // 問題追加処理
-      
-      this.new_problem = "";
-      this.adding = false;
+      this.$crud.problem.create(this.new_problem, this.task.id).then(res => {
+        if(!res){
+          console.log('error!');
+          return;
+        }
+        this.new_problem = "";
+        this.adding = false;
+        this.$crud.problem.read_from_task_id(this.data.id).then(res => {
+          this.problems = res;
+        });
+      });
     },
     edit: function(){
       this.editing = true;
     },
     finish_edit: function(){
       // タスク更新処理
+      this.$crud.task.update(this.task.id, this.task.task, this.task.state).then(res => {
+        if(!res){
+          alert('error!');
+          return;
+        }
+        // task更新後の処理を記述する
 
+      });
       this.editing = false;
     }
+  },
+  created: function(){
+    this.$crud.problem.read_from_task_id(this.data.id).then(res => {
+      this.problems = res;
+    });
   }
 }
 </script>

@@ -17,7 +17,8 @@
 ※依存関係のエラーを無視してインストールしているだけなので実行してみて不具合があれば別で解決する必要がある~~  
 webpackのバージョンの問題だった。最新のsass-loaderはwebpack4は非推奨 -> `npm install --save-dev sass-loader@10`でsass-loader@10系をインストールして解決
 
-
+## メモ
+- taskを追加した際、追加されたタスクのステータスは0のため、処理をする必要がある
 ## Project setup
 ```
 npm install

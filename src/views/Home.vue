@@ -64,15 +64,22 @@ export default {
     },
     add_task: function(){
       // タスク追加処理
-      this.$crud.task.create(this.new_task);
+      this.$crud.task.create(this.new_task).then(res => {
+        if(!res){
+          alert('error!');
+          return;
+        }
+        this.new_task = "";
+        this.$crud.task.read(this.state).then(res => {
+          this.tasks = res;
+        });
+      });
       this.adding = false;
-      this.new_task = "";
-      this.tasks = this.$crud.task.read[this.state];
     }
   },
   created: function(){
     this.$crud.task.read(this.state).then(res => {
-      this.task = res;
+      this.tasks = res;
       console.log(res);
     });
   }

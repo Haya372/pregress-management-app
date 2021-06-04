@@ -114,12 +114,8 @@ const problem = {
     return result;
   },
   read_from_task_id: async function(task_id){
-    let problems = await all(`select id from problems where task_id = '` + task_id + `'`);
-    let res = [];
-    for(let p of problems){
-      res.push(p.id);
-    }
-    return res;
+    let problems = await all(`select * from problems where task_id = '` + task_id + `'`);
+    return problems;
   },
   create: async function(content, task_id){
     try{
@@ -158,10 +154,6 @@ const problem = {
 const task = {
   read: async function(state){
     let result = await all(`select * from tasks where state = ` + state);
-    for(let i = 0; i < result.length; i++){
-      let problems = await problem.read_from_task_id(result[i].id);
-      result[i]['problems'] = problems;
-    }
     return result;
   },
   create: async function(content){
