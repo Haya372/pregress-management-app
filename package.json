@@ -16,7 +16,7 @@
     "core-js": "^3.6.5",
     "electronic": "^0.0.1",
     "nanoid": "^3.1.22",
-    "sqlite3": "^5.0.0",
+    "sqlite3": "^5.0.2",
     "vue": "^2.6.11",
     "vue-material": "*",
     "vue-router": "^3.2.0",

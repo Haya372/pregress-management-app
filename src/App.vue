@@ -46,19 +46,19 @@
       <v-tabs-items v-model="tab">
         <v-tab-item value="progress">
           <v-card flat>
-            <Home state="進行中" />
+            <Home state="0" />
           </v-card>
         </v-tab-item>
 
         <v-tab-item value="holding">
           <v-card flat>
-            <Home state="保留" />
+            <Home state="1" />
           </v-card>
         </v-tab-item>
 
         <v-tab-item value="finished">
           <v-card flat>
-            <Home state="終了済み" />
+            <Home state="2" />
           </v-card>
         </v-tab-item>
       </v-tabs-items>

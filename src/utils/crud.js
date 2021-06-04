@@ -1,7 +1,9 @@
 const sqlite = require('sqlite3').verbose();
 const nanoid = require('nanoid');
+//const path = require('path');
+//const db_path = path.resolve(__dirname, 'task.sqlite');
 
-const db = new sqlite.Database('../../task.sqlite');
+const db = new sqlite.Database('task.sqlite');
 
 
 // init databese
@@ -159,7 +161,7 @@ const task = {
     for(let i = 0; i < result.length; i++){
       let problems = await problem.read_from_task_id(result[i].id);
       result[i]['problems'] = problems;
-    };
+    }
     return result;
   },
   create: async function(content){
@@ -167,7 +169,8 @@ const task = {
       await run(`insert into tasks(id, task, state, created_at, updated_at)
       values('` + nanoid.nanoid(10) + `', '` + content
       + `', 0, datetime('now', 'localtime'), datetime('now', 'localtime'))`);
-    }catch{
+    }catch(e){
+      console.log(e)
       return false;
     }
     return true;
