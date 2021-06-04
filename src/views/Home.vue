@@ -40,7 +40,7 @@
 <script>
 // @ is an alias to /src
 import Task from '@/components/Task.vue'
-import sample_data from '../../sample_data'
+//import sample_data from '../../sample_data'
 export default {
   name: 'Home',
   components: {
@@ -53,7 +53,7 @@ export default {
       sorting_methods: [
         "降順", "昇順", "サブタスク"
       ],
-      tasks: sample_data.tasks[this.state],
+      tasks: [],
       adding: false,
       new_task: "",
     }
@@ -64,10 +64,24 @@ export default {
     },
     add_task: function(){
       // タスク追加処理
-
+      this.$crud.task.create(this.new_task).then(res => {
+        if(!res){
+          alert('error!');
+          return;
+        }
+        this.new_task = "";
+        this.$crud.task.read(this.state).then(res => {
+          this.tasks = res;
+        });
+      });
       this.adding = false;
-      this.new_task = "";
     }
+  },
+  created: function(){
+    this.$crud.task.read(this.state).then(res => {
+      this.tasks = res;
+      console.log(res);
+    });
   }
 }
 </script>
