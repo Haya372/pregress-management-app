@@ -107,9 +107,8 @@ export default {
           return;
         }
         // task更新後の処理を記述する
-
+        this.editing = false;
       });
-      this.editing = false;
     }
   },
   created: function(){
