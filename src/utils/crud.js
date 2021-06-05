@@ -68,12 +68,8 @@ const memo = {
     return result;
   },
   read_from_problem_id : async function(problem_id){
-    let memos = await all(`select id from memos where problem_id = '` + problem_id + `'`);
-    let res = [];
-    for(let m of memos){
-      res.push(m.id);
-    }
-    return res;
+    let memos = await all(`select * from memos where problem_id = '` + problem_id + `'`);
+    return memos;
   },
   create: async function(content, problem_id){
     try{
