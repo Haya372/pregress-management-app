@@ -31,7 +31,7 @@
     </v-row>
     <v-row justify="center">
       <v-expansion-panels multiple class="mb-6">
-        <Task :data="task" v-for="(task, i) in tasks" :key="i"/>
+        <Task :data="task" v-for="(task, i) in tasks" :key="i" />
       </v-expansion-panels>
     </v-row>
   </div>
@@ -70,11 +70,14 @@ export default {
           return;
         }
         this.new_task = "";
-        this.$crud.task.read(this.state).then(res => {
-          this.tasks = res;
-        });
+        this.$emit('add-new-task');
       });
       this.adding = false;
+    },
+    update: function(){
+      this.$crud.task.read(this.state).then(res => {
+        this.tasks = res;
+      });
     }
   },
   created: function(){
