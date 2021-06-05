@@ -32,6 +32,7 @@
             v-model="problem.solved"
             color="success"
             @click.stop
+            @change="status_change"
           ></v-checkbox>
         </v-col>
       </v-row>
@@ -56,7 +57,6 @@
 </template>
 
 <script>
-import sample_data from '../../sample_data'
 import Memo from '@/components/Memo.vue'
 
 export default {
@@ -68,7 +68,7 @@ export default {
   data: function(){
     return {
       problem: this.data,
-      memos: sample_data.memos,
+      memos: [],
       editing: false,
       adding: false,
       new_memo: "",
@@ -80,18 +80,44 @@ export default {
     },
     add_memo: function(){
       // メモ追加処理
-      
-      this.new_memo = "";
-      this.adding = false;
+      this.$crud.memo.create(this.new_memo, this.problem.id).then(res => {
+        if(!res){
+          alert('error!');
+          return;
+        }
+        this.new_memo = "";
+        this.adding = false;
+        this.$crud.memo.read_from_problem_id(this.data.id).then(res => {
+          this.memos = res;
+        });
+      });
     },
     edit: function(){
       this.editing = true;
     },
     finish_edit: function(){
       // 問題更新処理
-
-      this.editing = false;
+      this.$crud.problem.update(this.problem.id, this.problem.problem, this.problem.solved).then(res => {
+        if(!res){
+          alert('error!');
+          return;
+        }
+        this.editing = false;
+      });
+    },
+    status_change(){
+      this.$crud.problem.update(this.problem.id, this.problem.problem, this.problem.solved).then(res => {
+        if(!res){
+          alert('error!');
+          return;
+        }
+      });
     }
+  },
+  created: function(){
+    this.$crud.memo.read_from_problem_id(this.data.id).then(res => {
+      this.memos = res;
+    });
   }
 }
 </script>
