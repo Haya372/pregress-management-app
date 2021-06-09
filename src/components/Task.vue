@@ -23,12 +23,15 @@
       </v-col>
       <v-col cols="2">
         <v-select
-          v-model="task.state"
+          v-model="state"
           single-line
           class="ml-auto"
-          :items="['進行中', '保留', '終了済み']"
+          :items="states"
+          item-text="text"
+          item-value="value"
           dense
           @click.stop
+          @change="state_change"
         ></v-select>
       </v-col>
     </v-expansion-panel-header>
@@ -68,7 +71,13 @@ export default {
       editing: false,
       adding: false,
       new_problem: "",
-      problems: []
+      problems: [],
+      states: [
+        { value: 0, text: "進行中" },
+        { value: 1, text: "保留" },
+        { value: 2, text: "終了済み" }
+      ],
+      state: {}
     }
   },
   methods: {
@@ -102,12 +111,24 @@ export default {
         // task更新後の処理を記述する
         this.editing = false;
       });
+    },
+    state_change(new_state){
+      this.task.state = new_state;
+      // タスク更新処理
+      this.$crud.task.update(this.task.id, this.task.task, this.task.state).then(res => {
+        if(!res){
+          alert('error!');
+          return;
+        }
+        this.$emit('task-state-change', new_state);
+      });
     }
   },
   created: function(){
     this.$crud.problem.read_from_task_id(this.data.id).then(res => {
       this.problems = res;
     });
+    this.state = this.states[this.data.state];
   }
 }
 </script>

@@ -31,7 +31,7 @@
     </v-row>
     <v-row justify="center">
       <v-expansion-panels multiple class="mb-6">
-        <Task :data="task" v-for="(task, i) in tasks" :key="i" />
+        <Task :data="task" v-for="(task, i) in tasks" :key="i" @task-state-change="onTaskStateChange"/>
       </v-expansion-panels>
     </v-row>
   </div>
@@ -78,12 +78,16 @@ export default {
       this.$crud.task.read(this.state).then(res => {
         this.tasks = res;
       });
+    },
+    onTaskStateChange: function(state){
+      this.$emit('task-state-change', state);
+      console.log('In home');
+      this.update();
     }
   },
   created: function(){
     this.$crud.task.read(this.state).then(res => {
       this.tasks = res;
-      console.log(res);
     });
   }
 }
