@@ -111,6 +111,15 @@ export default {
     this.$crud.memo.read_from_problem_id(this.data.id).then(res => {
       this.memos = res;
     });
+  },
+  watch: {
+    data: function(new_value){
+      this.problem = new_value;
+      console.log('updated')
+      this.$crud.memo.read_from_problem_id(new_value).then(res => {
+      this.memos = res;
+    });
+    }
   }
 }
 </script>

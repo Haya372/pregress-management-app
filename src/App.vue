@@ -88,7 +88,9 @@ export default {
     },
     onTaskStateChange: function(state){
       let childs = ["progress", "holding", "finished"];
-      if(this.$refs[childs[state]]) this.$refs[childs[state]].update();
+      if(this.$refs[childs[state]]) {
+        this.$refs[childs[state]].update();
+      }
     }
   }
 };

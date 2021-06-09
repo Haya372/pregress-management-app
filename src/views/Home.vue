@@ -81,7 +81,6 @@ export default {
     },
     onTaskStateChange: function(state){
       this.$emit('task-state-change', state);
-      console.log('In home');
       this.update();
     }
   },

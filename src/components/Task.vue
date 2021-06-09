@@ -129,6 +129,15 @@ export default {
       this.problems = res;
     });
     this.state = this.states[this.data.state];
+  },
+  watch: {
+    data: function(new_value){
+      this.task = new_value;
+      this.$crud.problem.read_from_task_id(new_value.id).then(res => {
+      this.problems = res;
+      this.state = this.states[new_value.state];
+    });
+    }
   }
 }
 </script>
