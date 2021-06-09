@@ -10,34 +10,27 @@
               @blur="finish_edit"
             ></v-text-field>
         </v-col>
-        <v-col v-else>
+        <v-col @click.stop="edit" v-else>
           {{ task.task }}
         </v-col>
       </v-row>
-      <v-col cols="1" v-if="!editing">
-          <v-btn color="primary" @click.stop="edit">
-            <v-icon>
-              mdi-square-edit-outline
-            </v-icon>
-          </v-btn>
-        </v-col>
-        <v-col cols="1">
-          <v-btn color="primary" @click.stop="create_problem">
-            <v-icon>
-              mdi-pencil-plus
-            </v-icon>
-          </v-btn>
-        </v-col>
-        <v-col cols="2">
-          <v-select
-            v-model="task.state"
-            single-line
-            class="ml-auto"
-            :items="['進行中', '保留', '終了済み']"
-            dense
-            @click.stop
-          ></v-select>
-        </v-col>
+      <v-col cols="1">
+        <v-btn color="primary" @click.stop="create_problem">
+          <v-icon>
+            mdi-pencil-plus
+          </v-icon>
+        </v-btn>
+      </v-col>
+      <v-col cols="2">
+        <v-select
+          v-model="task.state"
+          single-line
+          class="ml-auto"
+          :items="['進行中', '保留', '終了済み']"
+          dense
+          @click.stop
+        ></v-select>
+      </v-col>
     </v-expansion-panel-header>
     <v-row justify="center" v-if="adding">
       <v-col cols="10">

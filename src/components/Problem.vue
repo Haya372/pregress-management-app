@@ -10,15 +10,8 @@
             @blur="finish_edit"
           ></v-text-field>
         </v-col>
-        <v-col v-else>
+        <v-col @click.stop="edit" v-else>
           {{ problem.problem }}
-        </v-col>
-        <v-col cols="1" v-if="!editing">
-          <v-btn color="primary" @click.stop="edit">
-            <v-icon>
-              mdi-square-edit-outline
-            </v-icon>
-          </v-btn>
         </v-col>
         <v-col cols="1">
           <v-btn color="primary" @click.stop="create_memo">
