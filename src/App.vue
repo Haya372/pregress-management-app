@@ -46,19 +46,19 @@
       <v-tabs-items v-model="tab">
         <v-tab-item value="progress">
           <v-card flat>
-            <Home state="0" @add-new-task="onAddNewTask" ref="child"/>
+            <Home state="0" @add-new-task="onAddNewTask" ref="progress" @task-state-change="onTaskStateChange"/>
           </v-card>
         </v-tab-item>
 
         <v-tab-item value="holding">
           <v-card flat>
-            <Home state="1" @add-new-task="onAddNewTask"/>
+            <Home state="1" @add-new-task="onAddNewTask" ref="holding" @task-state-change="onTaskStateChange"/>
           </v-card>
         </v-tab-item>
 
         <v-tab-item value="finished">
           <v-card flat>
-            <Home state="2" @add-new-task="onAddNewTask"/>
+            <Home state="2" @add-new-task="onAddNewTask" ref="finished" @task-state-change="onTaskStateChange"/>
           </v-card>
         </v-tab-item>
       </v-tabs-items>
@@ -84,7 +84,13 @@ export default {
 
   methods: {
     onAddNewTask: function(){
-      this.$refs.child.update();
+      this.$refs.progress.update();
+    },
+    onTaskStateChange: function(state){
+      let childs = ["progress", "holding", "finished"];
+      if(this.$refs[childs[state]]) {
+        this.$refs[childs[state]].update();
+      }
     }
   }
 };
