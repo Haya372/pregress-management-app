@@ -144,6 +144,12 @@ const problem = {
       return false;
     }
     return true;
+  },
+  delete_from_task_id: async function(task_id){
+    let problems = await problem.read_from_task_id(task_id);
+    for(let p of problems){
+      await problem.delete(p.id);
+    }
   }
 }
 
@@ -177,13 +183,10 @@ const task = {
   },
   delete: async function(id){
     try{
-      let problems = await problem.read_from_task_id(id);
-      for(let problem_id of problems){
-        await problem.delete(problem_id);
-      }
+      await problem.delete_from_task_id(id);
       await run(`delete from tasks where id = '` + id + `'`);
     }catch(e){
-      console.log('t' + e)
+      console.log(e)
       return false;
     }
     return true;
