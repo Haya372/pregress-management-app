@@ -80,7 +80,7 @@ export default {
       });
     },
     onTaskStateChange: function(state){
-      this.$emit('task-state-change', state);
+      if(state) this.$emit('task-state-change', state);
       this.update();
     }
   },
