@@ -40,7 +40,7 @@
 <script>
 // @ is an alias to /src
 import Task from '@/components/Task.vue'
-//import sample_data from '../../sample_data'
+
 export default {
   name: 'Home',
   components: {
@@ -80,7 +80,7 @@ export default {
       });
     },
     onTaskStateChange: function(state){
-      this.$emit('task-state-change', state);
+      if(state) this.$emit('task-state-change', state);
       this.update();
     }
   },

@@ -15,9 +15,9 @@
         </v-col>
       </v-row>
       <v-col cols="1">
-        <v-btn color="primary" @click.stop="create_problem">
+        <v-btn color="primary" @click.stop="delete_task">
           <v-icon>
-            mdi-pencil-plus
+            mdi-delete
           </v-icon>
         </v-btn>
       </v-col>
@@ -40,6 +40,7 @@
         <v-text-field
           v-model="new_problem"
           solo
+          autofocus
         ></v-text-field>
       </v-col>
       <v-col cols="1">
@@ -48,9 +49,18 @@
         >追加</v-btn>
       </v-col>
     </v-row>
+    <v-row justify="center" v-else>
+      <v-btn
+        @click="create_problem"
+        color="primary"
+        class="mb-8"
+      >
+        新規問題を追加する
+      </v-btn>
+    </v-row>
     <v-expansion-panel-content>
       <v-expansion-panels multiple class="mb-6">
-        <Problem :data="problem" v-for="(problem, i) in problems" :key="i"/>
+        <Problem :data="problem" v-for="(problem, i) in problems" :key="i" @delete-problem="onDeleteProblem"/>
       </v-expansion-panels>
     </v-expansion-panel-content>
   </v-expansion-panel>
@@ -121,6 +131,21 @@ export default {
           return;
         }
         this.$emit('task-state-change', new_state);
+      });
+    },
+    delete_task(){
+      this.$crud.task.delete(this.task.id).then(res => {
+        if(!res){
+          alert('error!');
+          return;
+        }
+        this.$emit('task-state-change');
+      });
+    },
+    onDeleteProblem(){
+      console.log('delete');
+      this.$crud.problem.read_from_task_id(this.data.id).then(res => {
+        this.problems = res;
       });
     }
   },
