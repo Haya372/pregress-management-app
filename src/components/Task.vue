@@ -41,7 +41,6 @@
           v-model="new_problem"
           solo
           autofocus
-          @blur="adding=false"
         ></v-text-field>
       </v-col>
       <v-col cols="1">
@@ -61,7 +60,7 @@
     </v-row>
     <v-expansion-panel-content>
       <v-expansion-panels multiple class="mb-6">
-        <Problem :data="problem" v-for="(problem, i) in problems" :key="i"/>
+        <Problem :data="problem" v-for="(problem, i) in problems" :key="i" @delete-problem="onDeleteProblem"/>
       </v-expansion-panels>
     </v-expansion-panel-content>
   </v-expansion-panel>
@@ -141,6 +140,12 @@ export default {
           return;
         }
         this.$emit('task-state-change');
+      });
+    },
+    onDeleteProblem(){
+      console.log('delete');
+      this.$crud.problem.read_from_task_id(this.data.id).then(res => {
+        this.problems = res;
       });
     }
   },

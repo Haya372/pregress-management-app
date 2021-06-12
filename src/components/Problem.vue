@@ -14,9 +14,9 @@
           {{ problem.problem }}
         </v-col>
         <v-col cols="1">
-          <v-btn color="primary" @click.stop="create_memo">
+          <v-btn color="primary" @click.stop="delete_probrem">
             <v-icon>
-              mdi-pencil-plus
+              mdi-delete
             </v-icon>
           </v-btn>
         </v-col>
@@ -35,6 +35,7 @@
         <v-text-field
           v-model="new_memo"
           solo
+          autofocus
         ></v-text-field>
       </v-col>
       <v-col cols="1">
@@ -42,6 +43,15 @@
           @click="add_memo"
         >追加</v-btn>
       </v-col>
+    </v-row>
+    <v-row justify="center" v-else>
+      <v-btn
+        @click.stop="create_memo"
+        color="primary"
+        class="mb-8"
+      >
+        新規メモを追加する
+      </v-btn>
     </v-row>
     <v-expansion-panel-content>
       <Memo :data="memo" v-for="(memo, i) in memos" :key="i"/>
@@ -104,6 +114,15 @@ export default {
           alert('error!');
           return;
         }
+      });
+    },
+    delete_probrem(){
+      this.$crud.problem.delete(this.problem.id).then(res => {
+        if(!res){
+          alert('error!');
+          return;
+        }
+        this.$emit('delete-problem');
       });
     }
   },
